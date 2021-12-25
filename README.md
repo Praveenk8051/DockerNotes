@@ -65,6 +65,8 @@ If an image tag after the repository name is not specified, Docker will assume y
 
 * ```sudo docker --version```: Check if docker is installed
 
+* ```systemctl is-active docker``` : Linux system command to check if docker is active
+
 * Pull all of the images in a repository by adding the -a ﬂag to the ```docker image pull``` . Then ```docker image ls``` to look at the images pulled. Its probably not a good idea to pull all images as it images will be of larger size.
 
 * ```docker image pull ubuntu:latest``` : Pull the image 
@@ -143,3 +145,21 @@ image. Each layer is then pulled from Docker Hub.
 ```docker manifest inspect golang | grep 'architecture\|os'```: The ```docker manifest``` command lets you inspect the manifest list of any image on Docker Hub
 
 ## **Containers** ##
+
+* A container is the runtime instance of an image.
+
+![image](/images/container.png)
+
+
+
+* It's always a good idea to run container with restart policy. There are 3-types
+
+````
+* always
+* unless stopped
+* on-failed
+````
+
+
+
+``` docker container run --name neversaydie -it --restart always alpine sh```
