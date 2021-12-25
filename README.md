@@ -9,6 +9,7 @@ Summary of the book "DockerDeepDive" is written in this repo
 | 3. [**Commands**](#commands) |
 | 4. [**Multi-Architecture**](#multi-architecture) |
 | 5. [**Containers**](#containers) |
+| 6. [**Docker Compose**](#docker-compose) |
 
 ## **Introduction** ##
 
@@ -67,6 +68,8 @@ If an image tag after the repository name is not specified, Docker will assume y
 
 * ```systemctl is-active docker``` : Linux system command to check if docker is active
 
+
+
 * Pull all of the images in a repository by adding the -a ﬂag to the ```docker image pull``` . Then ```docker image ls``` to look at the images pulled. Its probably not a good idea to pull all images as it images will be of larger size.
 
 * ```docker image pull ubuntu:latest``` : Pull the image 
@@ -98,6 +101,9 @@ Stop the container and kill it using below commands
 
 * ```docker container rm vigilant_borg```
 
+* ```docker container inspect``` : will show you detailed conﬁguration and runtime information about a
+container. It accepts container names and container IDs as its main argument.
+
 * ```docker image build -t test:latest .``` : Build an image with tag name -t.
 
 * ```docker image inspect ubuntu:latest``` : Another way to see the layers of an image is to inspect the image with the ```docker image inspect```
@@ -111,7 +117,7 @@ A dangling image is an image that is no longer tagged, and appears in listings a
 
 * ```docker image rm``` : Deletes the image on Docker host. rm is for remove
 
-
+* ```docker container rm $(docker container ls -aq) -f``` : This commands should never be executed on production
 
 ![image](/images/docker_layers.png)
 
@@ -163,3 +169,50 @@ image. Each layer is then pulled from Docker Hub.
 
 
 ``` docker container run --name neversaydie -it --restart always alpine sh```
+
+* The process of taking an application and conﬁguring it to run as a container is called **containerizing**.
+
+
+* The process of containerizing an app looks like this:
+```
+Start with your application code and dependencies
+Create a Dockerfile that describes your app, its dependencies, and how to run it
+Feed the Dockerfile into the docker image build command
+Push the new image to a registry (optional)
+Run container from the image
+```
+
+![image](/images/containerizing.png)
+
+* Multi-stage builds can be to build and ship smaller images to our production environments. This is by combining multiple dockerfiles using ```FROM```
+
+
+## **Docker Compose** ##
+
+* Docker Compose, which deploys and manages multi-container applications on Docker nodes running in single-engine mode.
+
+
+* Docker compose comes to picture in deploying and managing lots of small microservices
+
+* When new changes are made to Dockerfile, instead of rebuilding the docker file to affect changes in docker-compose. One can physically replace the files in location mentioned in docker-compose
+
+* docker-compose ﬁle has 4 top-level keys:
+```
+version
+services
+networks
+volumes
+```
+
+```docker-compose --version``` : To check if docker-compose is installed
+
+
+
+```docker-compose up``` : bring up the compose service
+
+
+```docker-compose -f prod-equus-bass.yml up```: If  Compose
+ﬁle has a diﬀerent name, we need to specify it with the -f ﬂag. USual name will be ``docker-compose.yml``. At the last ``&`` and ``-d`` are used to bring back the terminal back and run process in background
+
+```docker-compose down``` bring down the service.
+
