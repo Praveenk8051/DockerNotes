@@ -10,6 +10,7 @@ Summary of the book "DockerDeepDive" is written in this repo
 | 4. [**Multi-Architecture**](#multi-architecture) |
 | 5. [**Containers**](#containers) |
 | 6. [**Docker Compose**](#docker-compose) |
+| 6. [**Docker Swarm**](#docker-swarm) |
 
 ## **Introduction** ##
 
@@ -216,3 +217,6 @@ volumes
 
 ```docker-compose down``` bring down the service.
 
+## **Docker Swarm** ##
+
+On the clustering front, Swarm groups one or more Doer nodes and lets you manage them as a cluster
